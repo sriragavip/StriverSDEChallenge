@@ -1,0 +1,44 @@
+Node *addTwoNumbers(Node *num1, Node *num2)
+{
+    Node *co=num1;Node *la;
+    while(num1!=NULL && num2!=NULL)
+    {  
+        int x=(num1->data)+(num2->data);
+        if(x>9)
+        {
+            num1->data=x-10;
+            x=1;
+            if(num1->next!=NULL)
+            num1->next->data+=x;
+            else {
+              Node *news;
+              news->data = x;
+              news->next = NULL;
+              num1->next = news;
+            }
+        }
+        else{
+            num1->data=x;
+        }
+        la=num1;
+        num1=num1->next;
+        num2=num2->next;
+    }
+    while(num1!=NULL)
+    {
+       if(num1->data<=9)
+       break;
+       else {
+         num1->data = num1->data - 10;
+        num1->next->data+=1;
+       }
+        num1=num1->next;
+    }
+    num1=la;
+    if(num2!=NULL)
+    num1->next=num2;
+   return co;
+}
+
+ 
+
