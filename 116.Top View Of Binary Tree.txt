@@ -1,0 +1,32 @@
+#include<map>
+vector<int> getTopView(TreeNode<int> *root) {
+   // Write your code here.
+       if(root == NULL)
+       return {};
+   vector<int> res;
+   //pos-node
+   map<int,int> m;
+   //node-pos
+   queue<pair<TreeNode<int> *,int>> q;
+   q.push({root, 0});
+   while(!q.empty()){
+       pair<TreeNode<int>*, int> temp=q.front();
+       q.pop();
+       TreeNode<int>* node=temp.first;
+       int pos=temp.second;
+       if(m.find(pos)==m.end())
+           m[pos]=node->val;
+     
+       if(node->left){
+           q.push({node->left, pos-1});
+       }
+       if(node->right){
+           q.push({node->right, pos+1});
+       }
+   }
+   for(auto x:m){
+       res.push_back(x.second);
+   }
+   return res;
+   
+}
